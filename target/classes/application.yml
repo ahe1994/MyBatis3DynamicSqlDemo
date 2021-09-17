@@ -1,0 +1,13 @@
+spring:
+  jmx:
+    default-domain: mybatis
+  datasource:
+    username: postgres
+    password: 123456
+    url: jdbc:postgresql://localhost:5432/postgres
+    driver-class-name: org.postgresql.Driver
+server:
+  port: 2021
+  servlet:
+    context-path: /mds
+

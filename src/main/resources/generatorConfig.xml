@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <!--导入配置 -->
+  <properties resource="application.yml"></properties>
+
+  <!-- context 一般是一个数据源一个context -->
+  <context id="default" targetRuntime="MyBatis3DynamicSQL">
+    <!-- 插件 -->
+    <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin">
+      <property name="useEqualsHashCodeFromRoot" value="true"/>
+    </plugin>
+    <plugin type="org.mybatis.generator.plugins.ToStringPlugin">
+      <property name="useToStringFromRoot" value="true"/>
+    </plugin>
+
+    <commentGenerator>
+      <property name="suppressAllComments" value="true"/>
+      <property name="suppressDate" value="true"/>
+    </commentGenerator>
+
+    <!--jdbc的数据库连接 -->
+    <jdbcConnection
+      driverClass="org.postgresql.Driver"
+      connectionURL="jdbc:postgresql://localhost:5432/postgres"
+      userId="postgres"
+      password="123456">
+    </jdbcConnection>
+
+    <!-- 类型解析器 -->
+    <javaTypeResolver>
+      <property name="forceBigDecimals" value="true"/>
+    </javaTypeResolver>
+
+    <!-- 实体类 -->
+    <javaModelGenerator
+      targetPackage="com.example.mybatisdynamicsqldemo.model"
+      targetProject=".\src\main\java">
+      <!-- <property name="rootClass" value="com.example.mybatisdynamicsqldemo.model"/> -->
+      <property name="trimStrings" value="true"/>
+    </javaModelGenerator>
+
+    <!-- xml -->
+    <sqlMapGenerator
+      targetPackage="mapper"
+      targetProject=".\src\main\resources">
+    </sqlMapGenerator>
+
+    <!-- Mapper接口 -->
+    <javaClientGenerator type="XMLMAPPER"
+      targetPackage="com.example.mybatisdynamicsqldemo.mapper"
+      targetProject=".\src\main\java">
+    </javaClientGenerator>
+
+    <!-- 指定数据库表 -->
+    <table schema="public" tableName="student"></table>
+    <table schema="public" tableName="score"></table>
+    <table schema="public" tableName="course" ></table>
+  </context>
+</generatorConfiguration>
