@@ -1,5 +1,6 @@
 package com.example.mybatisdynamicsqldemo.model;
 
+import java.util.Date;
 import javax.annotation.Generated;
 
 public class Student {
@@ -14,6 +15,9 @@ public class Student {
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     private Integer age;
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    private Date birthday;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String getId() {
@@ -55,6 +59,16 @@ public class Student {
         this.age = age;
     }
 
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
     @Override
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public boolean equals(Object that) {
@@ -71,7 +85,8 @@ public class Student {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
             && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()))
-            && (this.getAge() == null ? other.getAge() == null : this.getAge().equals(other.getAge()));
+            && (this.getAge() == null ? other.getAge() == null : this.getAge().equals(other.getAge()))
+            && (this.getBirthday() == null ? other.getBirthday() == null : this.getBirthday().equals(other.getBirthday()));
     }
 
     @Override
@@ -83,6 +98,7 @@ public class Student {
         result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
         result = prime * result + ((getGender() == null) ? 0 : getGender().hashCode());
         result = prime * result + ((getAge() == null) ? 0 : getAge().hashCode());
+        result = prime * result + ((getBirthday() == null) ? 0 : getBirthday().hashCode());
         return result;
     }
 
@@ -97,6 +113,7 @@ public class Student {
         sb.append(", username=").append(username);
         sb.append(", gender=").append(gender);
         sb.append(", age=").append(age);
+        sb.append(", birthday=").append(birthday);
         sb.append("]");
         return sb.toString();
     }

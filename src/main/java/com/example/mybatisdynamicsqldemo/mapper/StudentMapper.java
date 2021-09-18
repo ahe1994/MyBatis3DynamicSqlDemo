@@ -2,7 +2,6 @@ package com.example.mybatisdynamicsqldemo.mapper;
 
 import static com.example.mybatisdynamicsqldemo.mapper.StudentDynamicSqlSupport.*;
 
-import com.example.mybatisdynamicsqldemo.model.ScoreDTO;
 import com.example.mybatisdynamicsqldemo.model.Student;
 import java.util.Collection;
 import java.util.List;
@@ -35,7 +34,7 @@ import org.mybatis.dynamic.sql.util.mybatis3.MyBatis3Utils;
 @Mapper
 public interface StudentMapper {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    BasicColumn[] selectList = BasicColumn.columnList(id, username, gender, age);
+    BasicColumn[] selectList = BasicColumn.columnList(id, username, gender, age, birthday);
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
@@ -64,7 +63,8 @@ public interface StudentMapper {
         @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR),
         @Result(column="username", property="username", jdbcType=JdbcType.VARCHAR),
         @Result(column="gender", property="gender", jdbcType=JdbcType.VARCHAR),
-        @Result(column="age", property="age", jdbcType=JdbcType.INTEGER)
+        @Result(column="age", property="age", jdbcType=JdbcType.INTEGER),
+        @Result(column="birthday", property="birthday", jdbcType=JdbcType.TIMESTAMP)
     })
     List<Student> selectMany(SelectStatementProvider selectStatement);
 
@@ -89,6 +89,7 @@ public interface StudentMapper {
             .map(username).toProperty("username")
             .map(gender).toProperty("gender")
             .map(age).toProperty("age")
+            .map(birthday).toProperty("birthday")
         );
     }
 
@@ -99,6 +100,7 @@ public interface StudentMapper {
             .map(username).toProperty("username")
             .map(gender).toProperty("gender")
             .map(age).toProperty("age")
+            .map(birthday).toProperty("birthday")
         );
     }
 
@@ -109,6 +111,7 @@ public interface StudentMapper {
             .map(username).toPropertyWhenPresent("username", record::getUsername)
             .map(gender).toPropertyWhenPresent("gender", record::getGender)
             .map(age).toPropertyWhenPresent("age", record::getAge)
+            .map(birthday).toPropertyWhenPresent("birthday", record::getBirthday)
         );
     }
 
@@ -137,7 +140,8 @@ public interface StudentMapper {
         return dsl.set(id).equalTo(record::getId)
                 .set(username).equalTo(record::getUsername)
                 .set(gender).equalTo(record::getGender)
-                .set(age).equalTo(record::getAge);
+                .set(age).equalTo(record::getAge)
+                .set(birthday).equalTo(record::getBirthday);
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
@@ -145,17 +149,7 @@ public interface StudentMapper {
         return dsl.set(id).equalToWhenPresent(record::getId)
                 .set(username).equalToWhenPresent(record::getUsername)
                 .set(gender).equalToWhenPresent(record::getGender)
-                .set(age).equalToWhenPresent(record::getAge);
+                .set(age).equalToWhenPresent(record::getAge)
+                .set(birthday).equalToWhenPresent(record::getBirthday);
     }
-
-    @SelectProvider(type = SqlProviderAdapter.class, method = "select")
-    @Results(id = "StudentScores", value = {
-        @Result(column = "id", property = "id", jdbcType = JdbcType.VARCHAR,id = true),
-        @Result(column = "courseId", property = "courseId", jdbcType = JdbcType.VARCHAR),
-        @Result(column = "courseName", property = "courseName", jdbcType = JdbcType.VARCHAR),
-        @Result(column = "studentId", property = "studentId", jdbcType = JdbcType.VARCHAR),
-        @Result(column = "studentName", property = "studentName", jdbcType = JdbcType.VARCHAR),
-        @Result(column = "studentScore", property = "studentScore", jdbcType = JdbcType.INTEGER)
-    })
-    List<ScoreDTO> getStudentScores(SelectStatementProvider selectStatementProvider);
 }

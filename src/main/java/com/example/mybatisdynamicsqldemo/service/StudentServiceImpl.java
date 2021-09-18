@@ -9,6 +9,7 @@ import static org.mybatis.dynamic.sql.SqlBuilder.select;
 import static com.example.mybatisdynamicsqldemo.mapper.StudentDynamicSqlSupport.*;
 
 import com.example.mybatisdynamicsqldemo.mapper.CourseDynamicSqlSupport;
+import com.example.mybatisdynamicsqldemo.mapper.CustomMapper;
 import com.example.mybatisdynamicsqldemo.mapper.ScoreDynamicSqlSupport;
 import com.example.mybatisdynamicsqldemo.mapper.StudentDynamicSqlSupport;
 import com.example.mybatisdynamicsqldemo.mapper.StudentMapper;
@@ -29,9 +30,12 @@ public class StudentServiceImpl implements StudentService {
 
   private final StudentMapper studentMapper;
 
+  private final CustomMapper customMapper;
+
   @Autowired
-  public StudentServiceImpl(StudentMapper studentMapper) {
+  public StudentServiceImpl(StudentMapper studentMapper, CustomMapper customMapper) {
     this.studentMapper = studentMapper;
+    this.customMapper = customMapper;
   }
 
   @Override
@@ -85,6 +89,6 @@ public class StudentServiceImpl implements StudentService {
         .where(id, isEqualTo(studentId))
         .build()
         .render(new MyBatis3RenderingStrategy());
-    return studentMapper.getStudentScores(ssp);
+    return customMapper.getStudentScores(ssp);
   }
 }
