@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
   <!--导入配置 -->
-  <properties resource="application.yml"></properties>
+  <properties resource="application.properties"></properties>
 
   <!-- context 一般是一个数据源一个context -->
   <context id="default" targetRuntime="MyBatis3DynamicSQL">
@@ -23,10 +23,10 @@
 
     <!--jdbc的数据库连接 -->
     <jdbcConnection
-      driverClass="org.postgresql.Driver"
-      connectionURL="jdbc:postgresql://localhost:5432/postgres"
-      userId="postgres"
-      password="123456">
+      driverClass="${spring.datasource.driver-class-name}"
+      connectionURL="${spring.datasource.url}"
+      userId="${spring.datasource.username}"
+      password="${spring.datasource.password}">
     </jdbcConnection>
 
     <!-- 类型解析器 -->
